@@ -7,9 +7,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_customer'])) {
 
     $sqlDelete = "DELETE FROM customers WHERE id = $customerID";
     if ($conn->query($sqlDelete) === TRUE) {
-        echo "Customer deleted successfully.";
+        echo '<div class="alert alert-success" role="alert">Customer deleted successfully.</div>';
     } else {
-        echo "Error deleting customer: " . $conn->error;
+        echo '<div class="alert alert-danger" role="alert">Error deleting customer: ' . $conn->error . '</div>';
     }
 }
 
@@ -25,16 +25,21 @@ $sql = "SELECT * FROM customers ORDER BY created_at DESC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo '<table border="1">
-            <tr>
-                <th>Account Number</th>
-                <th>Customer Name</th>
-                <th>Billing Address</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Business Type</th>
-                <th>Preferred Days</th>
-            </tr>';
+    echo '<table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Account Number</th>
+                    <th>Customer Name</th>
+                    <th>Billing Address</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Business Type</th>
+                    <th>Preferred Days</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>';
 
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
@@ -48,23 +53,22 @@ if ($result->num_rows > 0) {
                 <td>
                     <form method='post' action=''>
                         <input type='hidden' name='edit_customer' value='{$row['id']}'>
-                        <button type='submit'>Edit</button>
+                        <button type='submit' class='btn btn-primary btn-sm'>Edit</button>
                     </form>
                 </td>
                 <td>
                     <form method='post' action=''>
                         <input type='hidden' name='delete_customer' value='{$row['id']}'>
-                        <button type='submit'>Delete</button>
+                        <button type='submit' class='btn btn-danger btn-sm'>Delete</button>
                     </form>
                 </td>
               </tr>";
     }
 
-    echo '</table>';
+    echo '</tbody></table>';
 } else {
-    echo 'No customers found.';
+    echo '<div class="alert alert-info" role="alert">No customers found.</div>';
 }
 
 $conn->close();
 ?>
-
