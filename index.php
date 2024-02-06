@@ -8,6 +8,12 @@
 </head>
 <body class="container mt-4">
 
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+            <img src="dwc_logo.png" alt="Dealer's Warehouse Logo" class="img-fluid">
+        </div>
+    </div>
+
     <h2>Add New Customer</h2>
     <form action="process.php" method="post">
 
@@ -43,7 +49,8 @@
 
         <div class="form-group">
             <label for="phone">Phone:</label>
-            <input type="tel" class="form-control" name="phone" required>
+            <input type="tel" class="form-control" name="phone" pattern="\d{10}" title="Please enter a 10-digit phone number without dashes." required>
+            <small class="form-text text-muted">Please enter a 10-digit phone number.</small>
         </div>
 
         <div class="form-group">

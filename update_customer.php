@@ -1,6 +1,7 @@
 <?php
 include 'config.php';
 
+// Check if the form has been submitted using
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $customerID = $_POST['customer_id'];
     $customerName = $_POST['customer_name'];
@@ -14,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $businessType = $_POST['business_type'];
     $preferredDays = implode(",", $_POST['preferred_days']);
 
+    // SQL query to update customer data in the 'customers' table in the database
     $sqlUpdate = "UPDATE customers 
                   SET customer_name = '$customerName',
                       address1 = '$address1',
@@ -27,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       preferred_days = '$preferredDays'
                   WHERE id = $customerID";
 
+    // Check if the SQL query execution was successful
     if ($conn->query($sqlUpdate) === TRUE) {
         header("Location: index.php");
     } else {

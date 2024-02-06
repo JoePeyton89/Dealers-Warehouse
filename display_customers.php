@@ -1,7 +1,7 @@
 <?php
 include 'config.php';
 
-// Handle delete action
+// Handle delete action - Retrieves customer ID and deletes query
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_customer'])) {
     $customerID = $_POST['delete_customer'];
 
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_customer'])) {
     }
 }
 
-// Handle edit action
+// Handle edit action - Retrieves customer ID and redirects to edit_customer.php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_customer'])) {
     $customerID = $_POST['edit_customer'];
     header("Location: edit_customer.php?id=$customerID");

@@ -1,12 +1,15 @@
 <?php
 include 'config.php';
 
+// Check if the request method is GET and if the 'id' parameter is set in the URL
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     $customerId = $_GET['id'];
 
+    // SQL query to select customer data based on the provided ID
     $sql = "SELECT * FROM customers WHERE id = $customerId";
     $result = $conn->query($sql);
 
+    // Check if any rows are returned from the query
     if ($result->num_rows > 0) {
         $customerData = $result->fetch_assoc();
     } else {
@@ -31,6 +34,7 @@ $conn->close();
     <h2>Edit Customer</h2>
     <form action="update_customer.php" method="post">
 
+        <!-- Hidden input to store the customer ID for form submission -->
         <input type="hidden" name="customer_id" value="<?php echo $customerData['id']; ?>">
 
         <div class="form-group">
